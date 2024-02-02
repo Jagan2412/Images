@@ -128,4 +128,27 @@ class Program
             Console.WriteLine($"{rowsAffected} row(s) deleted.");
         }
     }
+
+    //Using DataTable
+     static DataTable GetEmployees()
+     {
+        DataTable dataTable = new DataTable();
+
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            connection.Open();
+
+            string selectQuery = "SELECT EmployeeId, FirstName, LastName, FilePath FROM Employees";
+
+            using (SqlCommand cmd = new SqlCommand(selectQuery, connection))
+            {
+                using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+                {
+                    adapter.Fill(dataTable);
+                }
+            }
+        }
+
+        return dataTable;
+    }
 }
