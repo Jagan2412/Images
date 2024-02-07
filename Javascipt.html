@@ -1,0 +1,87 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h1>TextBox and Dropdown</h1>
+    
+    <label>First Name</label>
+    <input type="text" id="txtFirstName" placeholder="First Name">
+
+    <label>Last Name</label>
+    <input type="text" id="txtLastName" class="clsLastName" placeholder="Last Name">
+
+    <button onclick="showValues()">Click</button>
+
+    <label>Enter ID</label>
+    <input type="text" id="txtID" placeholder="Enter ID From 1 to 10" >
+    <button onclick="getDatabyID()">Click</button>
+    
+    <select id="slData">
+        <option>Value 1</option>
+        <option>Value 2</option>
+        <option>Value 3</option>
+    </select>
+
+    <div id="result"></div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+
+function showValues(){
+debugger;
+    var firstNameValue = document.getElementById('txtFirstName').value;
+    var lastNameValue = document.getElementById('txtLastName').value;
+
+    var firstNameValue =  $("#txtFirstName").val();
+    var lastNameValue =  $(".clsLastName").val();
+
+    if(firstNameValue == ""){
+        alert("Please Enter First Name");
+    }
+    else if(lastNameValue == ""){
+        alert("Please Enter Last Name")
+    }else{
+        alert(firstNameValue + " "+ lastNameValue)
+    }
+}
+    // Function to make an AJAX GET request
+    function makeGetRequest(url, callback) {
+        debugger
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                // Successful response
+                callback(xhr.responseText);
+            }
+        };
+        xhr.open("GET", url, true);
+        xhr.send();
+    }
+
+    // Example: Make a GET request to a sample API
+    var apiUrl;
+    var ID;
+
+    function getDatabyID(){
+        debugger
+        ID = $("#txtID").val();
+        apiUrl = "https://jsonplaceholder.typicode.com/todos/"+parseInt(ID);
+        makeGetRequest(apiUrl, function (response) {
+        debugger
+        // Parse the JSON response
+        var data = JSON.parse(response);
+        // Display the result in a div
+        document.getElementById("result").innerHTML = "<p>User ID: " + data.userId + "</p>" +
+                                                        "<p>Title: " + data.title + "</p>" +
+                                                        "<p>Completed: " + data.completed + "</p>";
+    });
+}
+
+
+</script>
+</body>
+</html>
