@@ -35,8 +35,10 @@ namespace oops
             set { name = value; }
         }
 
+        //Auto-implemented Property
         public int AutoProperty { get; set; }
 
+        //Property with Validation
         private int age;
 
         public int Age
@@ -51,6 +53,7 @@ namespace oops
             }
         }
 
+        //Static Property
         private static int staticValue;
 
         public static int StaticProperty
