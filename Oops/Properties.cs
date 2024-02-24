@@ -69,7 +69,7 @@ namespace oops
     {
         static void Main()
         {
-            Example example = new Example();
+            Properties example = new Properties();
 
             // Read-Only Property
             int readOnlyValue = example.ReadOnlyProperty;
